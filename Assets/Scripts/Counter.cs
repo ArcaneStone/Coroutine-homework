@@ -4,50 +4,29 @@ using UnityEngine.UI;
 
 public class Counter : MonoBehaviour
 {
-    [SerializeField] private Text _counterText;
-
-    private Coroutine _counterCoroutine;
+    private float _counter;
+    private float _delayInSeconds;
 
     private bool _isWork = true;
-    private float _counter = 0;
-    private float _delayInSeconds = 0.5f;
-    private float _counterIncrement = 1f;
 
-    void Start()
+    public Counter(float delayInSeconds)
     {
-        _counterText.text = _counter.ToString();
+        _delayInSeconds = delayInSeconds;
     }
 
-    void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            ToggleCounter();
-        }
-    }
-
-    private void ToggleCounter()
-    {
-        if(_counterCoroutine != null)
-        {
-            StopCoroutine(_counterCoroutine);
-            _counterCoroutine = null;
-        }
-        else
-        {
-            _counterCoroutine = StartCoroutine(CountUp());
-        }        
-    }
-
-    private IEnumerator CountUp()
+    public IEnumerator CountUp()
     {
         var wait = new WaitForSeconds(_delayInSeconds);
 
         while (_isWork)
         {
             yield return wait;
-            _counter += _counterIncrement;
-            _counterText.text = _counter.ToString();
+            _counter++;
         }
+    }
+
+    public float GetCounterValue()
+    {
+        return _counter;
     }
 }

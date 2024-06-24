@@ -388,6 +388,7 @@ GameObject:
   - component: {fileID: 2044483983}
   - component: {fileID: 2044483986}
   - component: {fileID: 2044483985}
+  - component: {fileID: 2044483987}
   - component: {fileID: 2044483984}
   m_Layer: 5
   m_Name: Text (Legacy)
@@ -427,7 +428,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2aace68668136489c9ba578ec16f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _counterText: {fileID: 2044483985}
 --- !u!114 &2044483985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,6 +470,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2044483982}
   m_CullTransparentMesh: 1
+--- !u!114 &2044483987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044483982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 482a7dc4d6e34ff43a4d1e1d3f08d74c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _counterText: {fileID: 2044483985}
 --- !u!1 &2146329286
 GameObject:
   m_ObjectHideFlags: 0
