@@ -1,10 +1,9 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Counter : MonoBehaviour
+public class Counter
 {
-    private float _counter;
+    private float _meter;
     private float _delayInSeconds;
 
     private bool _isWork = true;
@@ -21,12 +20,12 @@ public class Counter : MonoBehaviour
         while (_isWork)
         {
             yield return wait;
-            _counter++;
+            _meter++;
         }
     }
 
     public float GetCounterValue()
     {
-        return _counter;
+        return _meter;
     }
 }
