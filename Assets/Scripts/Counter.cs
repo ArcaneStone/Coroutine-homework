@@ -7,8 +7,11 @@ public class Counter : MonoBehaviour
     [SerializeField] private Text _counterText;
 
     private Coroutine _counterCoroutine;
+
+    private bool _isWork = true;
     private float _counter = 0;
-    private bool _isCounting = false;
+    private float _delayInSeconds = 0.5f;
+    private float _counterIncrement = 1f;
 
     void Start()
     {
@@ -25,28 +28,25 @@ public class Counter : MonoBehaviour
 
     private void ToggleCounter()
     {
-        _isCounting = !_isCounting;
-
-        if (_isCounting)
+        if(_counterCoroutine != null)
         {
-            _counterCoroutine = StartCoroutine(CountUp());
+            StopCoroutine(_counterCoroutine);
+            _counterCoroutine = null;
         }
         else
         {
-            StopCoroutine(_counterCoroutine);
-        }
+            _counterCoroutine = StartCoroutine(CountUp());
+        }        
     }
 
     private IEnumerator CountUp()
     {
-        bool isWork = true;
-        float delayInSeconds = 0.5f;
+        var wait = new WaitForSeconds(_delayInSeconds);
 
-        while (isWork)
+        while (_isWork)
         {
-            yield return new WaitForSeconds(delayInSeconds);
-
-            _counter += 1;
+            yield return wait;
+            _counter += _counterIncrement;
             _counterText.text = _counter.ToString();
         }
     }
