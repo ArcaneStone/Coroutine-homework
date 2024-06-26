@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,42 +6,38 @@ public class CounterView : MonoBehaviour
 {
     [SerializeField] private Text _counterText;
 
-    private Coroutine _counterCoroutine;
     private Counter _counter;
 
-    private float _delayInSeconds = 0.5f;
+    private float delayInSeconds = 0.5f;
 
     private void Start()
     {
-        _counter = new Counter(_delayInSeconds);
-        _counterText.text = _counter.GetCounterValue().ToString();
+        _counter = new Counter(delayInSeconds);
+        _counterText.text = _counter.GetValue().ToString();
+
+        _counter.ValueChanged += OnCounterValueChanged;
     }
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            ToggleCounter();
-        }
-
-        UpdateCounterText();
+            if (_counter != null)
+            {
+                if (_counter.GetValue() == 0)
+                {
+                    _counter.StartCounting();
+                }
+                else
+                {
+                    _counter.StopCounting();
+                }                
+            }
+        }        
     }
 
-    private void ToggleCounter()
+    private void OnCounterValueChanged(float newValue)
     {
-        if (_counterCoroutine != null)
-        {
-            StopCoroutine(_counterCoroutine);
-            _counterCoroutine = null;
-        }
-        else
-        {
-            _counterCoroutine = StartCoroutine(_counter.CountUp());
-        }
-    }
-
-    private void UpdateCounterText()
-    {
-        _counterText.text =_counter.GetCounterValue().ToString();
+        _counterText.text = newValue.ToString();
     }
 }
