@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class Counter : MonoBehaviour 
 {
-    private float _delayInSeconds;
+    private float _delayInSeconds = 0.5f;
     private float _value = 0;
     private bool _isRunning = false;
 
     public event Action<float> ValueChanged;
-
-    public Counter(float delayInSeconds)
-    {
-        _delayInSeconds = delayInSeconds;
-    }
 
     public void StartCounting()
     {        
